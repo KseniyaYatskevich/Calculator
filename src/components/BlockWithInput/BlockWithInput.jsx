@@ -6,7 +6,7 @@ import Input from '../Input/Input'
 function BlockWithInput({titleBlock, inputHandler, value}) {
   return (
     <div className="block__input">
-      <h2>{titleBlock}</h2>
+      <h2 className="block__input_title">{titleBlock}</h2>
       <Input 
         onChangeHandler={inputHandler}
         value={value}

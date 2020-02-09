@@ -9,7 +9,11 @@
 }
 
 .button__small {
-    width: 70px;
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+    padding: 5px;
+    margin: 3px;
 }
 
 .button__active {
