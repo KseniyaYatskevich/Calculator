@@ -1,35 +1,27 @@
 import React, {Component} from 'react';
-// import Button from './components/Button/Button';
 import ButtonsBlock from '../ButtonsBlock/ButtonsBlock';
 import BlockWithInput from '../BlockWithInput/BlockWithInput';
 import './Loan.css';
-import {LOCATION_API_URL, PERIODS, CREDIT_SCORE} from '../../constants/index';
+import PropTypes from 'prop-types';
+import {PERIODS, CREDIT_SCORE} from '../../constants/index';
 
 
 class Loan extends Component {
   constructor(props) {
-    super(props);  
-    this.locationApiURL = LOCATION_API_URL;
+    super(props); 
+    this.props = props;
     this.inputTradeInHandler = this.inputTradeInHandler.bind(this);
     this.inputDownPaymentHandler = this.inputDownPaymentHandler.bind(this);
     this.inputAPRHandler = this.inputAPRHandler.bind(this);
-    this.inputPostCodeHandler = this.inputPostCodeHandler.bind(this);
     this.selectTerm = this.selectTerm.bind(this);
     this.selectCreditScore = this.selectCreditScore.bind(this);
     this.state = {
       tradeInValue: '0',
       downPaymentValue: '0',
       APR: '0',
-      postCode: this.getLocation(),
       term: '24',
       creditScore: '750',
     };  
-  }
-
-  async getLocation() {
-    const res = await fetch(this.locationApiURL);
-    const data = await res.json();
-    this.setState({postCode: data.postal})     
   }
 
   inputTradeInHandler(event) {
@@ -54,14 +46,6 @@ class Loan extends Component {
     }  
   }
 
-  inputPostCodeHandler(event) {
-    this.setState({postCode: ''});
-    if ((/^\d+$/).test(event.target.value)) {
-      this.setState({postCode: event.target.value});
-      console.log(event.target.value)
-    } 
-  }
-
   selectTerm(value) {
     this.setState({term: value});
     console.log(value)
@@ -73,6 +57,7 @@ class Loan extends Component {
   }
 
   render() {
+    const {postCode, inputPostCodeHandler} = this.props;
     return(
       <div className="loan__container">
          <BlockWithInput 
@@ -92,8 +77,8 @@ class Loan extends Component {
         />
         <BlockWithInput 
           titleBlock = 'Post Code'
-          inputHandler = {this.inputPostCodeHandler}
-          value ={this.state.postCode}
+          inputHandler = {inputPostCodeHandler}
+          value ={postCode}
         />
         <ButtonsBlock 
           titleBlock = 'Term (Month)'
@@ -110,6 +95,11 @@ class Loan extends Component {
       </div>
     )
   }
+}
+
+Loan.propTypes = {
+  postCode: PropTypes.string,
+  inputPostCodeHandler: PropTypes.func,
 }
 
 export default Loan;

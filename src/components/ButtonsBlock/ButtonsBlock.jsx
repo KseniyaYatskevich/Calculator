@@ -27,7 +27,7 @@ ButtonsBlock.propTypes = {
   selectValue: PropTypes.func,
   selectedValue: PropTypes.string,
   titleBlock: PropTypes.string,
-  arrayValues: PropTypes.object,
+  arrayValues: PropTypes.array,
 }
 
 export default ButtonsBlock;
