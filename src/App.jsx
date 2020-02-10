@@ -1,14 +1,14 @@
-import React, {Component, Fragment} from 'react';
-import Button from './components/Button/Button';
-import Lease from './components/Lease/Lease';
-import Loan from './components/Loan/Loan';
-import {LOCATION_API_URL} from './constants/index';
+import React, { Component, Fragment } from 'react';
+import Button from './components/Button/Button.jsx';
+import Lease from './components/Lease/Lease.jsx';
+import Loan from './components/Loan/Loan.jsx';
+import { LOCATION_API_URL } from './constants/index';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
-    super(props); 
-    this.locationApiURL = LOCATION_API_URL;   
+    super(props);
+    this.locationApiURL = LOCATION_API_URL;
     this.swichCalculatorType = this.swichCalculatorType.bind(this);
     this.inputPostCodeHandler = this.inputPostCodeHandler.bind(this);
     this.state = {
@@ -27,53 +27,51 @@ class App extends Component {
   async getLocation() {
     const res = await fetch(this.locationApiURL);
     const data = await res.json();
-    console.log(data)
     this.setState({
       postCode: data.postal,
-    })       
+    });
   }
 
   inputPostCodeHandler(event) {
-    this.setState({ postCode:'', });
+    this.setState({ postCode: '' });
     if ((/^\d+$/).test(event.target.value)) {
-      this.setState({postCode: event.target.value});
-      console.log(event.target.value)
-    } 
+      this.setState({ postCode: event.target.value });
+    }
   }
 
-  swichCalculatorType(value) {   
-    this.setState ({calculatorType: value});      
+  swichCalculatorType(value) {
+    this.setState({ calculatorType: value });
   }
 
   render() {
     const isLoansCalculator = this.state.calculatorType === 'Loan';
-    const {postCode} = this.state;
+    const { postCode } = this.state;
     return (
       <Fragment>
-        <Button 
-          value="Loan" 
+        <Button
+          value="Loan"
           onClickHandler={this.swichCalculatorType}
-          isActive={isLoansCalculator} 
+          isActive={isLoansCalculator}
           buttonSize = {false}
         />
         <Button
           value="Lease"
           onClickHandler={this.swichCalculatorType}
           isActive={!isLoansCalculator}
-          buttonSize = {false} 
+          buttonSize = {false}
         />
         {
-          isLoansCalculator 
-            ? <Loan 
+          isLoansCalculator
+            ? <Loan
               postCode ={postCode}
               inputPostCodeHandler={this.inputPostCodeHandler}
-            /> 
-            : <Lease 
+            />
+            : <Lease
               postCode ={postCode}
               inputPostCodeHandler={this.inputPostCodeHandler}
             />
         }
-      </Fragment>       
+      </Fragment>
     );
   }
 }

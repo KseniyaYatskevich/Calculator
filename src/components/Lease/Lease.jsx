@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import BlockWithInput from '../BlockWithInput/BlockWithInput';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import BlockWithSelectInput from '../BlockWithSelectInput/BlockWithSelectInput';
+import BlockWithInput from '../BlockWithInput/BlockWithInput.jsx';
+import BlockWithSelectInput from '../BlockWithSelectInput/BlockWithSelectInput.jsx';
 import './Lease.css';
 
-class Lease extends Component{
+class Lease extends Component {
   constructor(props) {
     super(props);
     this.props = props;
@@ -19,46 +19,46 @@ class Lease extends Component{
       postCode: this.postCode,
       term: '36',
       creditScore: '750',
-    };  
+    };
   }
 
   inputTradeInHandler(event) {
-    this.setState({tradeInValue: ''});
+    this.setState({ tradeInValue: '' });
     if ((/^\d+$/).test(event.target.value)) {
-      this.setState({tradeInValue: event.target.value});
-    }   
+      this.setState({ tradeInValue: event.target.value });
+    }
   }
 
   inputDownPaymentHandler(event) {
-    this.setState({downPaymentValue: ''});
+    this.setState({ downPaymentValue: '' });
     if ((/^\d+$/).test(event.target.value)) {
-      this.setState({downPaymentValue: event.target.value});
-    }  
+      this.setState({ downPaymentValue: event.target.value });
+    }
   }
 
   selectTerm(event) {
-    this.setState({term: event.target.value});      
+    this.setState({ term: event.target.value });
   }
 
   selectCreditScore(event) {
-    this.setState({creditScore: event.target.value});
+    this.setState({ creditScore: event.target.value });
   }
 
   render() {
-    const {postCode, inputPostCodeHandler} = this.props;
-    return(
+    const { postCode, inputPostCodeHandler } = this.props;
+    return (
       <div className="lease__container">
-        <BlockWithInput 
+        <BlockWithInput
           titleBlock = 'Down Payment'
           inputHandler = {this.inputTradeInHandler}
           value ={this.state.tradeInValue}
         />
-        <BlockWithInput 
+        <BlockWithInput
           titleBlock = 'Trade-in Value'
           inputHandler = {this.inputDownPaymentHandler}
           value ={this.state.downPaymentValue}
         />
-        <BlockWithInput 
+        <BlockWithInput
           titleBlock = 'Post Code'
           inputHandler = {inputPostCodeHandler}
           value ={postCode}
@@ -80,13 +80,13 @@ class Lease extends Component{
           value = {this.state.creditScore}
         />
       </div>
-    )
+    );
   }
 }
 
 Lease.propTypes = {
   postCode: PropTypes.string,
   inputPostCodeHandler: PropTypes.func,
-}
+};
 
 export default Lease;

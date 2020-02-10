@@ -4,7 +4,7 @@ module.exports = {
         "es6": true
     },
     "extends": [
-        "eslint:recommended",
+        "airbnb-base",
         "plugin:react/recommended"
     ],
     "globals": {
