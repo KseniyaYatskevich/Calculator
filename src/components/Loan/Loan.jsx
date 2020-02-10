@@ -59,6 +59,7 @@ class Loan extends Component {
       <div className="loan__container">
          <BlockWithInput
           titleBlock = 'Down Payment'
+          className="red"
           inputHandler = {this.inputTradeInHandler}
           value ={this.state.tradeInValue}
         />

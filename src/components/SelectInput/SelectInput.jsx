@@ -2,7 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './SelectInput.css';
 
-function SelectInput(step, maxValue, minValue, onChangeHandler, value) {
+function SelectInput({
+  step,
+  maxValue,
+  minValue,
+  onChangeHandler,
+  value,
+}) {
   return (
     <input
       type="number"

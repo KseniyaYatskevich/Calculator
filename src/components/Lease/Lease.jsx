@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import BlockWithInput from '../BlockWithInput/BlockWithInput.jsx';
 import BlockWithSelectInput from '../BlockWithSelectInput/BlockWithSelectInput.jsx';
+import Select from '../Select/Select.jsx';
+import { MILEAGES } from '../../constants/index';
 import './Lease.css';
 
 class Lease extends Component {
@@ -10,15 +12,16 @@ class Lease extends Component {
     this.props = props;
     this.inputTradeInHandler = this.inputTradeInHandler.bind(this);
     this.inputDownPaymentHandler = this.inputDownPaymentHandler.bind(this);
-    this.inputPostCodeHandler = this.inputPostCodeHandler.bind(this);
     this.selectTerm = this.selectTerm.bind(this);
     this.selectCreditScore = this.selectCreditScore.bind(this);
+    this.selectMileagesValue = this.selectMileagesValue.bind(this);
     this.state = {
       tradeInValue: '0',
       downPaymentValue: '0',
       postCode: this.postCode,
       term: '36',
       creditScore: '750',
+      miliages: '12000',
     };
   }
 
@@ -44,6 +47,10 @@ class Lease extends Component {
     this.setState({ creditScore: event.target.value });
   }
 
+  selectMileagesValue(event) {
+    this.setState({ miliages: event.target.value });
+  }
+
   render() {
     const { postCode, inputPostCodeHandler } = this.props;
     return (
@@ -66,7 +73,7 @@ class Lease extends Component {
         <BlockWithSelectInput
           titleBlock = 'Term (Month)'
           step = '12'
-          maxValue = '72'
+          maxValue = '48'
           minValue = '12'
           onChangeHandler = {this.selectTerm}
           value = {this.state.term}
@@ -78,6 +85,12 @@ class Lease extends Component {
           minValue = '600'
           onChangeHandler = {this.selectCreditScore}
           value = {this.state.creditScore}
+        />
+        <Select
+          titleBlock="Miliages"
+          arrayValues={MILEAGES}
+          onChangeHandler={this.selectMileagesValue}
+          value={this.state.miliages}
         />
       </div>
     );
