@@ -16,7 +16,7 @@ function SelectInput({
       min = {minValue}
       max = {maxValue}
       value={value}
-      onChange={onChangeHandler}
+      onBlur={onChangeHandler}
     />
   );
 }

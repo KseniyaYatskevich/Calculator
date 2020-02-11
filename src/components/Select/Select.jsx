@@ -13,7 +13,7 @@ function Select({
     <div className="block__select">
       <h2 className="block__select_title">{titleBlock}</h2>
       <select
-        onChange={onChangeHandler}
+        onBlur={onChangeHandler}
         value={value}
       >
       {arrayValues.map((miliages, index) => (
