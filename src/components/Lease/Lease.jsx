@@ -57,13 +57,13 @@ class Lease extends Component {
       <div className="lease__container">
         <BlockWithInput
           titleBlock = 'Down Payment'
-          inputHandler = {this.inputTradeInHandler}
-          value ={this.state.tradeInValue}
-        />
-        <BlockWithInput
-          titleBlock = 'Trade-in Value'
           inputHandler = {this.inputDownPaymentHandler}
           value ={this.state.downPaymentValue}
+          />
+        <BlockWithInput
+          titleBlock = 'Trade-in Value'
+          inputHandler = {this.inputTradeInHandler}
+          value ={this.state.tradeInValue}
         />
         <BlockWithInput
           titleBlock = 'Post Code'

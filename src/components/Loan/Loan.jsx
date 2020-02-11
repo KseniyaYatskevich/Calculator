@@ -21,7 +21,9 @@ class Loan extends Component {
       APR: '0',
       term: '24',
       creditScore: '750',
+      creditScoreValue: '0.95',
     };
+    console.log(this.state);
   }
 
   inputTradeInHandler(event) {
@@ -39,14 +41,29 @@ class Loan extends Component {
   }
 
   inputAPRHandler(event) {
+    this.setState({ APR: '' });
     if ((/^[0-9,.]+$/).test(event.target.value) && event.target.value < 100) {
-      this.setState({ APR: '' });
       this.setState({ APR: event.target.value });
     }
   }
 
+  calculatecreditScoreValue() {
+    if (this.state.creditScore >= 750) {
+      this.setState({ creditScoreValue: '0.95' });
+    } else if (this.state.creditScore < 750 && this.state.creditScore >= 700) {
+      this.setState({ creditScoreValue: '1' });
+    } else if (this.state.creditScore < 700 && this.state.creditScore >= 640) {
+      this.setState({ creditScoreValue: '1.05' });
+    } else this.setState({ creditScoreValue: '1.2' });
+  }
+
   selectTerm(value) {
     this.setState({ term: value });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  calculatTaxes(postCode) {
+    return postCode.split('').map((num) => num * 11);
   }
 
   selectCreditScore(value) {
@@ -54,6 +71,7 @@ class Loan extends Component {
   }
 
   render() {
+    console.log(this.state);
     const { postCode, inputPostCodeHandler } = this.props;
     return (
       <div className="loan__container">
@@ -89,6 +107,8 @@ class Loan extends Component {
           selectValue={this.selectCreditScore}
           selectedValue={this.state.creditScore}
         />
+        <h3>Taxes</h3>
+        <p>{this.calculatTaxes(postCode)}</p>
       </div>
     );
   }
