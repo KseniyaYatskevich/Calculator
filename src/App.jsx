@@ -84,6 +84,7 @@ class App extends Component {
               ? <Loan
                 postCode ={postCode}
                 inputPostCodeHandler={this.inputPostCodeHandler}
+                msrp={this.state.MSRP}
               />
               : <Lease
                 postCode ={postCode}

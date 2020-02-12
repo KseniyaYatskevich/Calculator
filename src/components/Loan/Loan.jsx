@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ButtonsBlock from '../ButtonsBlock/ButtonsBlock.jsx';
@@ -14,6 +15,7 @@ class Loan extends Component {
     this.inputDownPaymentHandler = this.inputDownPaymentHandler.bind(this);
     this.inputAPRHandler = this.inputAPRHandler.bind(this);
     this.selectTerm = this.selectTerm.bind(this);
+    this.setMonthlyPaymentLoan = this.setMonthlyPaymentLoan.bind(this);
     this.selectCreditScore = this.selectCreditScore.bind(this);
     this.state = {
       tradeInValue: '0',
@@ -22,8 +24,8 @@ class Loan extends Component {
       term: '24',
       creditScore: '750',
       creditScoreValue: '0.95',
+      monthlyPaymentLoan: '0',
     };
-    console.log(this.state);
   }
 
   inputTradeInHandler(event) {
@@ -57,6 +59,19 @@ class Loan extends Component {
     } else this.setState({ creditScoreValue: '1.2' });
   }
 
+
+  async calculateMonthlyPaymentLoan() {
+    const monthlyPaymentLoan = ((this.props.msrp - this.state.tradeInValue - this.state.downPaymentValue) * this.state.creditScoreValue * this.state.APR) / this.state.term;
+    return Promise.resolve(monthlyPaymentLoan);
+  }
+
+  async setMonthlyPaymentLoan() {
+    const res = await this.calculateMonthlyPaymentLoan();
+    this.setState({
+      monthlyPaymentLoan: res,
+    });
+  }
+
   selectTerm(value) {
     this.setState({ term: value });
   }
@@ -71,7 +86,6 @@ class Loan extends Component {
   }
 
   render() {
-    console.log(this.state);
     const { postCode, inputPostCodeHandler } = this.props;
     return (
       <div className="loan__container">
@@ -79,21 +93,25 @@ class Loan extends Component {
           titleBlock = 'Down Payment'
           inputHandler = {this.inputDownPaymentHandler}
           value ={this.state.downPaymentValue}
+          onBlurHandler={this.setMonthlyPaymentLoan}
           />
         <BlockWithInput
           titleBlock = 'Trade-in Value'
           inputHandler = {this.inputTradeInHandler}
           value ={this.state.tradeInValue}
+          onBlurHandler={this.setMonthlyPaymentLoan}
         />
         <BlockWithInput
           titleBlock = 'Estimated APR'
           inputHandler = {this.inputAPRHandler}
           value ={this.state.APR}
+          onBlurHandler={this.setMonthlyPaymentLoan}
         />
         <BlockWithInput
           titleBlock = 'Post Code'
           inputHandler = {inputPostCodeHandler}
           value ={postCode}
+          onBlurHandler={this.setMonthlyPaymentLoan}
         />
         <ButtonsBlock
           titleBlock = 'Term (Month)'
@@ -109,6 +127,8 @@ class Loan extends Component {
         />
         <h3>Taxes</h3>
         <p>{this.calculatTaxes(postCode)}</p>
+        <h3>Monthly Payment</h3>
+        <p>{`$ ${Math.round(this.state.monthlyPaymentLoan)}`}</p>
       </div>
     );
   }
@@ -117,6 +137,7 @@ class Loan extends Component {
 Loan.propTypes = {
   postCode: PropTypes.string,
   inputPostCodeHandler: PropTypes.func,
+  msrp: PropTypes.string,
 };
 
 export default Loan;
