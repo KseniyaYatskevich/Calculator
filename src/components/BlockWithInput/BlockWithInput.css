@@ -1,0 +1,15 @@
+.block__input {
+    
+    height: 70px;
+    border-radius: 5px;
+    border: 1px solid #111111;
+    padding: 5px 10px;
+    margin: 5px;
+    font-size: 18px;
+}
+
+.block__input_title {
+    font-size: 18px;
+    padding: 5px;
+    margin: 0;
+}

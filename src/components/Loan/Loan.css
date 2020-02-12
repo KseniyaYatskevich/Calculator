@@ -1,0 +1,12 @@
+.loan__container {
+    border: 1px solid #000000;
+    width: 50%;   
+}
+
+.total {
+    padding: 5px;
+    background: #cbcbcb;
+    border:1px solid #000000;
+    border-radius: 5px;
+    margin: 5px;
+}

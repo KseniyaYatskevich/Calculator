@@ -1,0 +1,12 @@
+.block__select {       
+    border-radius: 5px;
+    border: 1px solid #111111;
+    padding: 5px 10px;
+    margin: 5px;
+}
+
+.block__select_title {
+    font-size: 18px;
+    padding: 5px;
+    margin: 0;
+}
