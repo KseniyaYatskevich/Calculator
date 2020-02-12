@@ -8,13 +8,15 @@ function Select({
   arrayValues,
   onChangeHandler,
   value,
+  onBlurHandler,
 }) {
   return (
     <div className="block__select">
       <h2 className="block__select_title">{titleBlock}</h2>
       <select
-        onBlur={onChangeHandler}
+        onChange={onChangeHandler}
         value={value}
+        onBlur={onBlurHandler}
       >
       {arrayValues.map((miliages, index) => (
         <option
@@ -31,6 +33,7 @@ Select.propTypes = {
   arrayValues: PropTypes.array,
   onChangeHandler: PropTypes.func,
   value: PropTypes.string,
+  onBlurHandler: PropTypes.func,
 };
 
 export default Select;

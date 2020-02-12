@@ -10,6 +10,7 @@ function BlockWithSelectInput({
   onChangeHandler,
   value,
   titleBlock,
+  onBlurHandler,
 }) {
   return (
     <div className="block__input">
@@ -20,6 +21,7 @@ function BlockWithSelectInput({
         maxValue = {maxValue}
         minValue = {minValue}
         value={value}
+        onBlurHandler={onBlurHandler}
       />
     </div>
   );
@@ -32,6 +34,7 @@ BlockWithSelectInput.propTypes = {
   step: PropTypes.string,
   minValue: PropTypes.string,
   maxValue: PropTypes.string,
+  onBlurHandler: PropTypes.func,
 };
 
 export default BlockWithSelectInput;

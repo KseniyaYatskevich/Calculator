@@ -89,6 +89,7 @@ class App extends Component {
               : <Lease
                 postCode ={postCode}
                 inputPostCodeHandler={this.inputPostCodeHandler}
+                msrp={this.state.MSRP}
               />
           }
           <InfoCard

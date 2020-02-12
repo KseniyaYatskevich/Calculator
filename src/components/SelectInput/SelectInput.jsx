@@ -8,6 +8,7 @@ function SelectInput({
   minValue,
   onChangeHandler,
   value,
+  onBlurHandler,
 }) {
   return (
     <input
@@ -16,7 +17,8 @@ function SelectInput({
       min = {minValue}
       max = {maxValue}
       value={value}
-      onBlur={onChangeHandler}
+      onChange={onChangeHandler}
+      onBlur={onBlurHandler}
     />
   );
 }
@@ -27,6 +29,7 @@ SelectInput.propTypes = {
   step: PropTypes.string,
   onChangeHandler: PropTypes.func,
   value: PropTypes.string,
+  onBlurHandler: PropTypes.func,
 };
 
 export default SelectInput;
