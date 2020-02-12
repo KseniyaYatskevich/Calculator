@@ -18,6 +18,7 @@ class Loan extends Component {
     this.setMonthlyPaymentLoan = this.setMonthlyPaymentLoan.bind(this);
     this.selectCreditScore = this.selectCreditScore.bind(this);
     this.state = {
+      isError: 'false',
       tradeInValue: '0',
       downPaymentValue: '0',
       APR: '0',
@@ -125,10 +126,12 @@ class Loan extends Component {
           selectValue={this.selectCreditScore}
           selectedValue={this.state.creditScore}
         />
-        <h3>Taxes</h3>
-        <p>{this.calculatTaxes(postCode)}</p>
-        <h3>Monthly Payment</h3>
-        <p>{`$ ${Math.round(this.state.monthlyPaymentLoan)}`}</p>
+        <div className="total">
+          <h3>Taxes</h3>
+          <p>{this.calculatTaxes(postCode)}</p>
+          <h3>Monthly Payment</h3>
+          <p>{`$ ${Math.round(this.state.monthlyPaymentLoan)}`}</p>
+        </div>
       </div>
     );
   }

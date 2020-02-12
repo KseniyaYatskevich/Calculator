@@ -24,7 +24,7 @@ class Lease extends Component {
       creditScore: '750',
       miliages: '12000',
       creditScoreValue: '0.95',
-      monthlyPaymentLoan: '0',
+      monthlyPaymentLease: '0',
     };
   }
 
@@ -129,10 +129,12 @@ class Lease extends Component {
           value={this.state.miliages}
           onBlurHandler={this.setMonthlyPaymentLease}
         />
-        <h3>Taxes</h3>
-        <p>{this.calculatTaxes(postCode)}</p>
-        <h3>Monthly Payment</h3>
-        <p>{`$ ${Math.round(this.state.monthlyPaymentLease)}`}</p>
+        <div className="total">
+          <h3>Taxes</h3>
+          <p>{this.calculatTaxes(postCode)}</p>
+          <h3>Monthly Payment</h3>
+          <p>{`$ ${Math.round(this.state.monthlyPaymentLease)}`}</p>
+        </div>
       </div>
     );
   }
